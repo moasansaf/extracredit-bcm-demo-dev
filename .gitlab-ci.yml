@@ -1,0 +1,46 @@
+image: registry.pgx.local/build/maven:3-jdk-11
+
+stages:
+  # - test
+  - build
+
+# Run Unit Tests:
+#   stage: test
+#   tags:
+#     - deployment
+#   script:
+#     - mvn --settings ./settings.xml -B test
+
+Build & Push Stage:
+  stage: build
+  image: registry.pgx.local/build/docker:stable
+  tags:
+    - docker
+  before_script:
+    - apk --no-cache add curl bash nodejs npm
+    - npm install -g heroku
+    - heroku --version
+    - heroku container:login
+  script:
+    - heroku container:push -a demo-module-stage web
+    - heroku container:release -a demo-module-stage web
+  only:
+    refs:
+      - release 
+
+Build & Push Prod:
+  stage: build
+  image: registry.pgx.local/build/docker:stable
+  tags:
+    - docker
+  before_script:
+    - apk --no-cache add curl bash nodejs npm
+    - npm install -g heroku
+    - heroku --version
+    - heroku container:login
+  script:
+    - heroku container:push -a demo-module-prod web
+    - heroku container:release -a demo-module-prod web
+  only:
+    refs:
+      - master

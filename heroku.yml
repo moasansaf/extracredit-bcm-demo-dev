@@ -1,0 +1,10 @@
+build:
+  config:
+    PORT: 8080
+    WELCOME_MESSAGE: Demo Module on Heroku!!!
+    DB_HOST: jdbc:postgresql://dbclusteridentifier-extracredit-bcm-dev-data01.cluster-czqcrnu8rq1a.us-west-2.rds.amazonaws.com:5432/BuildCredit
+    DB_USERNAME: bcm-user
+    DB_PASSWORD: Start123
+
+
+

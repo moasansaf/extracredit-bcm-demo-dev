@@ -1,0 +1,16 @@
+# IntelliJ Idea Project Files
+.idea
+*.iml
+
+# Maven
+target/
+logs/
+# Eclipse
+.project
+.classpath
+.settings/
+database.*
+derby.log
+
+# Mac
+.DS_Store
